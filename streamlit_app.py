@@ -347,20 +347,12 @@ def process_response(response):
         "notes": "; ".join(notes) if notes else None
     }
 
-def run_async(awaitable):
+async def run(tech):
     try:
-        loop = asyncio.get_event_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
+        response = await runner.run_debug(tech)
 
-    if loop.is_running():
-        return asyncio.run_coroutine_threadsafe(awaitable, loop).result()
-    else:
-        return loop.run_until_complete(awaitable)
-        
-def run_agent(runner, tech):
-    return run_async(runner.run_debug(tech))
+    except Exception as e:
+        print(f"An error occurred during agent execution: {e}")
 
 # Main UI
 st.title("🔍 Technology Data Search Agent")
@@ -430,7 +422,7 @@ if uploaded_file is not None:
                 progress_bar.progress(idx / total)
                 
                 try:
-                    response = run_agent(runner, tech)
+                    response = asyncio.run(run(tech))
                     responses.append(response)
                     row = process_response(response)
                     rows.append(row)
