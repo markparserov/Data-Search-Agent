@@ -422,12 +422,12 @@ if uploaded_file is not None:
             responses = []
             rows = []
             
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            
             for idx, tech in enumerate(technologies_to_process, 1):
                 status_text.text(f"Processing {idx}/{total}: {tech}")
                 progress_bar.progress(idx / total)
-            
-                loop = asyncio.new_event_loop()
-                asyncio.set_event_loop(loop)
             
                 try:
                     response = loop.run_until_complete(run(tech))
@@ -446,15 +446,11 @@ if uploaded_file is not None:
                         "notes": f"Error: {str(e)}"
                     })
             
-                finally:
-                    try:
-                        loop.run_until_complete(loop.shutdown_asyncgens())
-                    except:
-                        pass
-                    loop.close()
-            
                 if idx < total:
                     time.sleep(delay_seconds)
+                    
+            loop.run_until_complete(loop.shutdown_asyncgens())
+            loop.close()
             
             # Create output DataFrame
             output_df = pd.DataFrame(rows)
