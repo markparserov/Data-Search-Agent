@@ -33,24 +33,32 @@ if 'output_df' not in st.session_state:
 
 # API Key setup
 st.sidebar.header("Configuration")
+
 api_key_source = st.sidebar.radio(
     "API Key Source",
-    ["Streamlit Secrets", "Environment Variable", "Manual Input"]
+    ["HF Secret", "Streamlit Secrets", "Manual Input"],
+    index=0  # default = HF Secret
 )
 
-if api_key_source == "Streamlit Secrets":
-    try:
-        google_api_key = st.secrets["GOOGLE_API_KEY"]
-    except KeyError:
-        st.sidebar.error("⚠️ GOOGLE_API_KEY not found in Streamlit secrets")
-        google_api_key = None
-elif api_key_source == "Environment Variable":
+google_api_key = None
+
+# 1) Hugging Face Secrets (environment variables)
+if api_key_source == "HF Secret":
     google_api_key = os.getenv("GOOGLE_API_KEY")
     if not google_api_key:
-        st.sidebar.error("⚠️ GOOGLE_API_KEY not found in environment variables")
-else:
+        st.sidebar.error("❌ GOOGLE_API_KEY not found in HF Secrets")
+
+# 2) Streamlit Secrets (only works if you explicitly added secrets.toml)
+elif api_key_source == "Streamlit Secrets":
+    google_api_key = st.secrets.get("GOOGLE_API_KEY")
+    if not google_api_key:
+        st.sidebar.error("❌ GOOGLE_API_KEY not found in Streamlit secrets")
+
+# 3) Manual input
+elif api_key_source == "Manual Input":
     google_api_key = st.sidebar.text_input("Enter Google API Key", type="password")
 
+# Apply key if found
 if google_api_key:
     os.environ["GOOGLE_API_KEY"] = google_api_key
     os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "FALSE"
