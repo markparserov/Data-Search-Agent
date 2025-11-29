@@ -425,13 +425,16 @@ if uploaded_file is not None:
             for idx, tech in enumerate(technologies_to_process, 1):
                 status_text.text(f"Processing {idx}/{total}: {tech}")
                 progress_bar.progress(idx / total)
-                
+            
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+            
                 try:
-                    response = asyncio.run(run(tech))
-                    responses.append(response)
+                    response = loop.run_until_complete(run(tech))
                     row = process_response(response)
                     rows.append(row)
                     st.success(f"✅ Completed: {tech}")
+            
                 except Exception as e:
                     st.error(f"❌ Error processing {tech}: {str(e)}")
                     rows.append({
@@ -442,7 +445,14 @@ if uploaded_file is not None:
                         "average_number_of_employees": None,
                         "notes": f"Error: {str(e)}"
                     })
-                
+            
+                finally:
+                    try:
+                        loop.run_until_complete(loop.shutdown_asyncgens())
+                    except:
+                        pass
+                    loop.close()
+            
                 if idx < total:
                     time.sleep(delay_seconds)
             
