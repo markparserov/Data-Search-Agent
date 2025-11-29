@@ -353,9 +353,10 @@ def process_response(response):
 async def run(tech):
     try:
         response = await runner.run_debug(tech)
-
+        return response
     except Exception as e:
         print(f"An error occurred during agent execution: {e}")
+        return None
 
 # Main UI
 st.title("🔍 Technology Data Search Agent")
