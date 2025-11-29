@@ -480,4 +480,3 @@ if st.session_state.processing_complete and st.session_state.output_df is not No
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         type="primary"
     )
-
