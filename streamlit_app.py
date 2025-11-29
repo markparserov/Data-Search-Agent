@@ -76,60 +76,60 @@ def initialize_agents():
     google_search_model = Gemini(model="gemini-2.5-flash", retry_options=retry_config)
     thinking_model = Gemini(model="gemini-2.5-pro", retry_options=retry_config)
     
-    # # Define Pydantic models
-    # class Revenue(BaseModel):
-    #     market_size: Optional[float] = Field(description="Estimated market size, may be null.", default=None)
-    #     currency: Optional[str] = Field(description="Currency code, e.g. USD or EUR, may be null.", default=None)
-    #     year: Optional[int] = Field(description="Year of the market estimate, may be null.", default=None)
-    #     source_title: str = Field(description="Title of the source document or report.")
-    #     source_url: str = Field(description="URL of the source.")
-    #     method_note: Optional[str] = Field(description="Methodological note explaining how the estimate was obtained.", default=None)
+    # Define Pydantic models
+    class Revenue(BaseModel):
+        market_size: Optional[float] = Field(description="Estimated market size, may be null.", default=None)
+        currency: Optional[str] = Field(description="Currency code, e.g. USD or EUR, may be null.", default=None)
+        year: Optional[int] = Field(description="Year of the market estimate, may be null.", default=None)
+        source_title: str = Field(description="Title of the source document or report.")
+        source_url: str = Field(description="URL of the source.")
+        method_note: Optional[str] = Field(description="Methodological note explaining how the estimate was obtained.", default=None)
     
-    # class RevenueTrend(BaseModel):
-    #     cagr: Optional[float] = Field(description="Compound annual growth rate, may be null.", default=None)
-    #     years_range: Optional[str] = Field(description="Range of years used to calculate CAGR, may be null.", default=None)
-    #     source_title: str = Field(description="Title of the source document or report.")
-    #     source_url: str = Field(description="URL of the source.")
-    #     method_note: Optional[str] = Field(description="Methodological note for CAGR estimation.", default=None)
+    class RevenueTrend(BaseModel):
+        cagr: Optional[float] = Field(description="Compound annual growth rate, may be null.", default=None)
+        years_range: Optional[str] = Field(description="Range of years used to calculate CAGR, may be null.", default=None)
+        source_title: str = Field(description="Title of the source document or report.")
+        source_url: str = Field(description="URL of the source.")
+        method_note: Optional[str] = Field(description="Methodological note for CAGR estimation.", default=None)
     
-    # class AverageNumberOfEmployees(BaseModel):
-    #     estimate_total: Optional[int] = Field(description="Estimated total number of employees, may be null.", default=None)
-    #     snapshots: List[Dict] = Field(
-    #         description="List of snapshot objects with site, query, observed_count, url."
-    #     )
-    #     notes: Optional[str] = Field(description="Additional notes about the estimation process.", default=None)
+    class AverageNumberOfEmployees(BaseModel):
+        estimate_total: Optional[int] = Field(description="Estimated total number of employees, may be null.", default=None)
+        snapshots: List[Dict] = Field(
+            description="List of snapshot objects with site, query, observed_count, url."
+        )
+        notes: Optional[str] = Field(description="Additional notes about the estimation process.", default=None)
     
-    # class Synthesis(BaseModel):
-    #     technology: str = Field(description="Technology name.")
-    #     description: Optional[str] = Field(description="Technology description, may be null.", default=None)
-    #     revenue: Optional[Dict] = Field(description="Revenue object or null.", default=None)
-    #     revenue_trend: Optional[Dict] = Field(description="Revenue trend object or null.", default=None)
-    #     average_number_of_employees: Optional[Dict] = Field(description="Average number of employees object or null.", default=None)
+    class Synthesis(BaseModel):
+        technology: str = Field(description="Technology name.")
+        description: Optional[str] = Field(description="Technology description, may be null.", default=None)
+        revenue: Optional[Dict] = Field(description="Revenue object or null.", default=None)
+        revenue_trend: Optional[Dict] = Field(description="Revenue trend object or null.", default=None)
+        average_number_of_employees: Optional[Dict] = Field(description="Average number of employees object or null.", default=None)
     
-    # # JSON configs
-    # json_cfg_revenue = types.GenerateContentConfig(
-    #     response_json_schema=Revenue.model_json_schema(),
-    #     temperature=0.0,
-    #     seed=42
-    # )
+    # JSON configs
+    json_cfg_revenue = types.GenerateContentConfig(
+        response_json_schema=Revenue.model_json_schema(),
+        temperature=0.0,
+        seed=42
+    )
     
-    # json_cfg_revenue_trend = types.GenerateContentConfig(
-    #     response_json_schema=RevenueTrend.model_json_schema(),
-    #     temperature=0.0,
-    #     seed=42,
-    # )
+    json_cfg_revenue_trend = types.GenerateContentConfig(
+        response_json_schema=RevenueTrend.model_json_schema(),
+        temperature=0.0,
+        seed=42,
+    )
     
-    # json_cfg_average_number_of_employees = types.GenerateContentConfig(
-    #     response_json_schema=AverageNumberOfEmployees.model_json_schema(),
-    #     temperature=0.0,
-    #     seed=42,
-    # )
+    json_cfg_average_number_of_employees = types.GenerateContentConfig(
+        response_json_schema=AverageNumberOfEmployees.model_json_schema(),
+        temperature=0.0,
+        seed=42,
+    )
     
-    # json_cfg_synthesis = types.GenerateContentConfig(
-    #     response_json_schema=Synthesis.model_json_schema(),
-    #     temperature=0.0,
-    #     seed=42,
-    # )
+    json_cfg_synthesis = types.GenerateContentConfig(
+        response_json_schema=Synthesis.model_json_schema(),
+        temperature=0.0,
+        seed=42,
+    )
     
     # MCP toolset
     mcp_http = McpToolset(
@@ -166,7 +166,7 @@ def initialize_agents():
         name="RevenueEstimator",
         description="Agent that determines the market size for a technology",
         model=google_search_model,
-        # generate_content_config=json_cfg_revenue,
+        generate_content_config=json_cfg_revenue,
         instruction="""
             Find the most recent and reliable public estimate of the global market size for the technology specified by the user.
             Use google_search and databases_search_agent tools to generate the answer and to double-check the facts.
@@ -194,7 +194,7 @@ def initialize_agents():
         name="CAGREstimator",
         description="Agent that determines the CAGR for a technology",
         model=google_search_model,
-        # generate_content_config=json_cfg_revenue_trend,
+        generate_content_config=json_cfg_revenue_trend,
         instruction="""
             Find the most reliable public estimate of the CAGR for the technology specified by the user.
             Use google_search and databases_search_agent tools to generate the answer and to verify facts.
@@ -221,7 +221,7 @@ def initialize_agents():
         name="JobsEstimator",
         model=google_search_model,
         description="Agent that determines the number of job openings for a technology",
-        # generate_content_config=json_cfg_average_number_of_employees,
+        generate_content_config=json_cfg_average_number_of_employees,
         instruction="""
             Estimate the current number of job openings related to the technology specified by the user.
             Use google_search and databases_search_agent tools to form the answer and to build the final estimate.
@@ -257,7 +257,7 @@ def initialize_agents():
     synthesis_agent = Agent(
         name="Synthesis",
         model=thinking_model,
-        # generate_content_config=json_cfg_synthesis,
+        generate_content_config=json_cfg_synthesis,
         tools=[],
         output_key="final_json",
         description="Agent that assembles the final result into a single JSON object",
