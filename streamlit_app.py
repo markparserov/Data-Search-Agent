@@ -82,8 +82,6 @@ def initialize_agents():
     google_search_model = Gemini(model="gemini-2.5-flash", retry_options=retry_config)
     thinking_model = Gemini(model="gemini-2.5-pro", retry_options=retry_config)
     
-    response_mime_type = "application/json"
-    
     # Define Pydantic models
     class Revenue(BaseModel):
         market_size: Optional[float] = Field(description="Estimated market size, may be null.", default=None)
@@ -116,28 +114,24 @@ def initialize_agents():
     
     # JSON configs
     json_cfg_revenue = types.GenerateContentConfig(
-        response_mime_type=response_mime_type,
         response_json_schema=Revenue.model_json_schema(),
         temperature=0.0,
         seed=42
     )
     
     json_cfg_revenue_trend = types.GenerateContentConfig(
-        response_mime_type=response_mime_type,
         response_json_schema=RevenueTrend.model_json_schema(),
         temperature=0.0,
         seed=42,
     )
     
     json_cfg_average_number_of_employees = types.GenerateContentConfig(
-        response_mime_type=response_mime_type,
         response_json_schema=AverageNumberOfEmployees.model_json_schema(),
         temperature=0.0,
         seed=42,
     )
     
     json_cfg_synthesis = types.GenerateContentConfig(
-        response_mime_type=response_mime_type,
         response_json_schema=Synthesis.model_json_schema(),
         temperature=0.0,
         seed=42,
