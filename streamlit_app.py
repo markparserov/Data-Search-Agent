@@ -282,7 +282,10 @@ def initialize_agents():
         description="Parallel research –> JSON synthesis"
     )
     
-    runner = InMemoryRunner(agent=data_search_agent, plugins=[LoggingPlugin()])
+    runner = InMemoryRunner(
+        agent=data_search_agent,
+        # plugins=[LoggingPlugin()]
+    )
     
     return runner
 
