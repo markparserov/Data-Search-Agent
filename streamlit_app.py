@@ -353,13 +353,25 @@ def process_response(response):
         "notes": "; ".join(notes) if notes else None
     }
 
+def run_async(awaitable):
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+    if loop.is_running():
+        return asyncio.run_coroutine_threadsafe(awaitable, loop).result()
+    else:
+        return loop.run_until_complete(awaitable)
+        
 @retry(
     stop=stop_after_attempt(5),
     wait=wait_fixed(5),
     retry=retry_if_exception_type(Exception)
 )
 def run_with_retry(runner, tech):
-    return asyncio.run(runner.run_debug(tech))
+    return run_async(runner.run_debug(tech))
 
 # Main UI
 st.title("🔍 Technology Data Search Agent")
