@@ -228,6 +228,7 @@ def initialize_agents():
             Priority sites for google_search: linkedin.com/jobs, indeed.com, glassdoor.com, google.com/about/careers/applications/jobs, etc.
             If platforms hide full job counts, make a conservative estimate based on samples and explicitly note the assumptions.
             For databases_search_agent: ask the agent to estimate the number of jobs for the technology / broader sector.
+            If you are not sure in your estimate based on the data collected – still provide at least a rough estimate_total.
             Return clean JSON with the following keys:
             {
               "estimate_total": <int|null>,
