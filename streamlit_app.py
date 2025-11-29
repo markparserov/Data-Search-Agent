@@ -4,6 +4,7 @@ import re
 import time
 import io
 
+import asyncio
 import pandas as pd
 import streamlit as st
 from google.adk.agents import Agent, SequentialAgent, ParallelAgent
@@ -364,8 +365,7 @@ def process_response(response):
     retry=retry_if_exception_type(Exception)
 )
 def run_with_retry(runner, tech):
-    """Run agent with retry logic"""
-    return runner.run_debug(tech)
+    return asyncio.run(runner.run_debug(tech))
 
 # Main UI
 st.title("🔍 Technology Data Search Agent")
