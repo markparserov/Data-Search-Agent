@@ -284,7 +284,7 @@ def initialize_agents():
     
     runner = InMemoryRunner(
         agent=data_search_agent,
-        # plugins=[LoggingPlugin()]
+        plugins=[LoggingPlugin()]
     )
     
     return runner
