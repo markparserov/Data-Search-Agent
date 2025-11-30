@@ -5,6 +5,8 @@ This is a submission for the [Kaggle Agents Intensive Capstone project](https://
 Data Search Agent is deployed as a Streamlit app on Hugging Face Spaces: [https://huggingface.co/spaces/markparserov/Data-Search-Agent](https://huggingface.co/spaces/markparserov/Data-Search-Agent).
 
 ## **About the Project**
+[[Watch the video](https://img.youtube.com/vi/pkCQ92_8dM4/maxresdefault.jpg)](https://youtu.be/pkCQ92_8dM4)
+
 **Problem Statement**
 
 As part of our work at a research institute, we trained an ML model that classifies technologies by their maturity stage using a set of features. To test the classifier on a case that matches real usage scenarios, we need not just a list of technologies but a full set of characteristics for each one: a textual description, market size, CAGR, and the number of job openings. Manual data collection is inefficient for large technology lists, and generating these data using basic LLMs is unreliable.
