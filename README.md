@@ -1,5 +1,7 @@
 # **Project Overview: Data Search Agent**
 
+This is a submssion for the [Kaggle Agents Intensive Capstone project]([(https://www.kaggle.com/competitions/agents-intensive-course-capstone-2025/]).
+
 **Problem Statement**
 
 As part of our work at a research institute, we trained an ML model that classifies technologies by their maturity stage using a set of features. To test the classifier on a case that matches real usage scenarios, we need not just a list of technologies but a full set of characteristics for each one: a textual description, market size, CAGR, and the number of job openings. Manual data collection is inefficient for large technology lists, and generating these data using basic LLMs is unreliable.
