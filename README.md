@@ -48,3 +48,60 @@ The architecture distributes the workload across multiple specialized AI agents,
 **Value Statement**
 
 The system reduces the duration of data collection by several times. For a list of 100 technologies, the automation saves more than 10 hours of manual work, since the agents handle search, fact retrieval, and structuring without direct human involvement.
+
+## Setup
+
+### Option 1: Use the hosted app
+
+The Data Search Agent is already deployed as a Streamlit app on Hugging Face Spaces:
+
+- **App:** https://huggingface.co/spaces/markparserov/Data-Search-Agent
+
+If you just want to try the system, you don’t need any local setup.
+
+---
+
+### Option 2: Run locally with Python
+
+#### 1. Clone the repository
+
+```bash
+git clone https://github.com/markparserov/Data-Search-Agent.git
+cd Data-Search-Agent
+```
+
+#### 2. Create and activate a virtual environment (recommended)
+```bash
+python -m venv .venv
+# macOS / Linux
+source .venv/bin/activate
+# Windows
+# .venv\Scripts\activate
+```
+
+#### 3. Install dependencies
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+#### 4. Configure environment variables
+
+The app uses Gemini through Google ADK. You need a Google API key with access to Gemini.
+
+Set the key as an environment variable:
+
+```bash
+# macOS / Linux
+export GOOGLE_API_KEY="your_google_api_key_here"
+
+# Windows (PowerShell)
+# $env:GOOGLE_API_KEY="your_google_api_key_here"
+```
+
+Optionally, you can define additional variables if you want to override defaults (for example, a different MCP server URL), but by default the app points to the public TAM MCP server used in the project code.
+
+#### 5. Run the Streamlit app
+```bash
+streamlit run streamlit_app.py
+```
