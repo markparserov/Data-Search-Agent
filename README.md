@@ -1,6 +1,6 @@
 # **Project Overview: Data Search Agent**
 
-This is a submssion for the [Kaggle Agents Intensive Capstone project]([(https://www.kaggle.com/competitions/agents-intensive-course-capstone-2025/]).
+This is a submssion for the [Kaggle Agents Intensive Capstone project](https://www.kaggle.com/competitions/agents-intensive-course-capstone-2025/).
 
 **Problem Statement**
 
