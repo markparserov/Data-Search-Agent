@@ -65,7 +65,7 @@ The Data Search Agent is deployed as a Streamlit app on Hugging Face Spaces:
 - **App:** https://huggingface.co/spaces/markparserov/Data-Search-Agent
 
 If you only need to run the system, local setup is unnecessary.  
-Download an Excel file `technology.xlsx` from this repo, upload it, start the pipeline, and download the completed file once processing finishes.
+Download an Excel file `technologies.xlsx` from this repo, upload it, start the pipeline, and download the completed file once processing finishes.
 
 ---
 
