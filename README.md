@@ -2,6 +2,7 @@
 
 ## **Notes**
 This is a submission for the [Kaggle Agents Intensive Capstone project](https://www.kaggle.com/competitions/agents-intensive-capstone-project).
+
 Data Search Agent is deployed as a Streamlit app on Hugging Face Spaces: [https://huggingface.co/spaces/markparserov/Data-Search-Agent](https://huggingface.co/spaces/markparserov/Data-Search-Agent).
 
 ## **About the Project**
