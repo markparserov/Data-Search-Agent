@@ -5,6 +5,7 @@ This is a submission for the [Kaggle Agents Intensive Capstone project](https://
 Data Search Agent is deployed as a Streamlit app on Hugging Face Spaces: [https://huggingface.co/spaces/markparserov/Data-Search-Agent](https://huggingface.co/spaces/markparserov/Data-Search-Agent).
 
 ## **About the Project**
+Watch the summary video:
 <p align="center">
   <a href="https://youtu.be/pkCQ92_8dM4">
     <img src="https://img.youtube.com/vi/pkCQ92_8dM4/maxresdefault.jpg" />
@@ -59,11 +60,12 @@ The system reduces the duration of data collection by several times. For a list 
 
 ### Option 1: Use the hosted app
 
-The Data Search Agent is already deployed as a Streamlit app on Hugging Face Spaces:
+The Data Search Agent is deployed as a Streamlit app on Hugging Face Spaces:
 
 - **App:** https://huggingface.co/spaces/markparserov/Data-Search-Agent
 
-If you just want to try the system, you don’t need any local setup.
+If you only need to run the system, local setup is unnecessary.  
+Download an Excel file `technology.xlsx` from this repo, upload it, start the pipeline, and download the completed file once processing finishes.
 
 ---
 
