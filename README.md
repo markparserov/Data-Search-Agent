@@ -5,7 +5,11 @@ This is a submission for the [Kaggle Agents Intensive Capstone project](https://
 Data Search Agent is deployed as a Streamlit app on Hugging Face Spaces: [https://huggingface.co/spaces/markparserov/Data-Search-Agent](https://huggingface.co/spaces/markparserov/Data-Search-Agent).
 
 ## **About the Project**
-[[Watch the video](https://img.youtube.com/vi/pkCQ92_8dM4/maxresdefault.jpg)](https://youtu.be/pkCQ92_8dM4)
+<p align="center">
+  <a href="https://youtu.be/pkCQ92_8dM4">
+    <img src="https://img.youtube.com/vi/pkCQ92_8dM4/maxresdefault.jpg" />
+  </a>
+</p>
 
 **Problem Statement**
 
